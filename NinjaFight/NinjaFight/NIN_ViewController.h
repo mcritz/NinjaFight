@@ -7,7 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
 
-@interface NIN_ViewController : UIViewController
+@interface NIN_ViewController : UIViewController <CLLocationManagerDelegate>
+
+// UI
+@property (weak, nonatomic) IBOutlet UILabel *proximityUUIDLabel;
+@property (weak, nonatomic) IBOutlet UILabel *beaconFoundLabel;
+@property (weak, nonatomic) IBOutlet UIButton *stealButton;
+- (IBAction)stealButtonPressed:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *playAgainButton;
+- (IBAction)playAgainButtonPressed:(id)sender;
+
+// CL
+@property (strong, nonatomic) CLBeaconRegion *beaconRegion;
+@property (strong, nonatomic) CLLocationManager *locationManager;
 
 @end

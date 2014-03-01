@@ -14,16 +14,66 @@
 
 @implementation NIN_ViewController
 
+@synthesize locationManager = _locationManager;
+
+- (CLLocationManager *)locationManager {
+    if (!_locationManager) {
+        _locationManager = [[CLLocationManager alloc] init];
+        _locationManager.delegate = self;
+    }
+    return _locationManager;
+}
+
+- (CLBeaconRegion *)beaconRegion {
+    if (!_beaconRegion) {
+        // TODO: not shitty hardcoded beacon
+        NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:@"8AEFB031-6C32-486F-825B-E26FA193487D"];
+        _beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:uuid identifier:@"com.MapOfTheUnexplored.NinjaFight"];
+    }
+    return _beaconRegion;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+    [self.stealButton setHidden:NO];
+    [self.playAgainButton setHidden:YES];
+    [self initRegion];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+
+- (void)initRegion {
+    [self.locationManager startMonitoringForRegion:self.beaconRegion];
+    [self.beaconFoundLabel setText:@"Scanning"];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region {
+    [self.beaconFoundLabel setText:@"Gem nearby!"];
+    [self.stealButton setHidden:NO];
+    [self.locationManager startRangingBeaconsInRegion:self.beaconRegion];
+}
+
+-(void)locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region {
+    [self.beaconFoundLabel setText:@"Left region"];
+    [self.locationManager stopRangingBeaconsInRegion:self.beaconRegion];
+}
+
+- (IBAction)stealButtonPressed:(id)sender {
+    [self.beaconFoundLabel setText:@"YOU WIN!"];
+    [self.stealButton setHidden:YES];
+    [self.playAgainButton setHidden:NO];
+}
+
+- (IBAction)playAgainButtonPressed:(id)sender {
+    [self.beaconFoundLabel setText:@"Scanning"];
+    [self.playAgainButton setHidden:YES];
+    [self.stealButton setHidden:YES];
 }
 
 @end
