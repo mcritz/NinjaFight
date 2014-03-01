@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
 
-@interface NIN_ViewController : UIViewController <CLLocationManagerDelegate>
+
+@interface NIN_ViewController : UIViewController <CLLocationManagerDelegate, UIGestureRecognizerDelegate>
 
 // UI
 @property (weak, nonatomic) IBOutlet UILabel *proximityUUIDLabel;
@@ -18,6 +19,9 @@
 - (IBAction)stealButtonPressed:(id)sender;
 @property (weak, nonatomic) IBOutlet UIButton *playAgainButton;
 - (IBAction)playAgainButtonPressed:(id)sender;
+@property (strong, nonatomic) IBOutlet UILongPressGestureRecognizer *stealLongPressGestureRecognizer;
+- (IBAction)stealLongPress:(id)sender;
+
 
 // CL
 @property (strong, nonatomic) CLBeaconRegion *beaconRegion;

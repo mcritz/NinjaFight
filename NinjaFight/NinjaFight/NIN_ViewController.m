@@ -39,6 +39,7 @@
     [self.stealButton setHidden:NO];
     [self.playAgainButton setHidden:YES];
     [self initRegion];
+    self.stealLongPressGestureRecognizer.delegate = self;
 }
 
 - (void)didReceiveMemoryWarning
@@ -65,6 +66,12 @@
 }
 
 - (IBAction)stealButtonPressed:(id)sender {
+    [self winGame];
+}
+
+
+- (void)winGame {
+    NSLog(@"winGame");
     [self.beaconFoundLabel setText:@"YOU WIN!"];
     [self.stealButton setHidden:YES];
     [self.playAgainButton setHidden:NO];
@@ -76,4 +83,10 @@
     [self.stealButton setHidden:YES];
 }
 
+- (IBAction)stealLongPress:(id)sender {
+    NSLog(@"stealLongPress");
+    if([sender state] ==  UIGestureRecognizerStateBegan) {
+        [self winGame];
+    }
+}
 @end

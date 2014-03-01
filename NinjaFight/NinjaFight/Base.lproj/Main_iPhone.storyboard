@@ -45,14 +45,25 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="FvV-ti-Jr4" appends="YES" id="hCG-ob-hBs"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="beaconFoundLabel" destination="WM3-qx-Ist" id="YPt-CX-b6r"/>
                         <outlet property="playAgainButton" destination="skZ-6Y-O91" id="GiF-hf-YiH"/>
                         <outlet property="stealButton" destination="gdQ-0u-bxm" id="497-1n-A1f"/>
+                        <outlet property="stealLongPressGestureRecognizer" destination="FvV-ti-Jr4" id="QkB-7C-sSy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
+                <pongPressGestureRecognizer allowableMovement="20" minimumPressDuration="0.5" id="FvV-ti-Jr4">
+                    <connections>
+                        <action selector="stealLongPress:" destination="vXZ-lx-hvc" id="Jyv-b4-3cW"/>
+                        <outlet property="delegate" destination="vXZ-lx-hvc" id="Dam-bA-bfl"/>
+                    </connections>
+                </pongPressGestureRecognizer>
             </objects>
         </scene>
     </scenes>
