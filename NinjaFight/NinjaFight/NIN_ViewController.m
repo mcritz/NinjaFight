@@ -1,4 +1,4 @@
-//
+ //
 //  NIN_ViewController.m
 //  NinjaFight
 //
@@ -9,6 +9,8 @@
 #import "NIN_ViewController.h"
 
 @interface NIN_ViewController ()
+
+@property bool isPlaying;
 
 @end
 
@@ -36,7 +38,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self.stealButton setHidden:NO];
+    [self.stealButton setHidden:YES];
     [self.playAgainButton setHidden:YES];
     [self initRegion];
     self.stealLongPressGestureRecognizer.delegate = self;
@@ -50,35 +52,61 @@
 
 
 - (void)initRegion {
+    [self.beaconFoundLabel setText:@"Starting up…"];
+    self.isPlaying = YES;
     [self.locationManager startMonitoringForRegion:self.beaconRegion];
-    [self.beaconFoundLabel setText:@"Scanning"];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region {
-    [self.beaconFoundLabel setText:@"Gem nearby!"];
-    [self.stealButton setHidden:NO];
+    self.isPlaying = YES;
     [self.locationManager startRangingBeaconsInRegion:self.beaconRegion];
 }
 
 -(void)locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region {
-    [self.beaconFoundLabel setText:@"Left region"];
+    [self.beaconFoundLabel setText:@"You have entered the land of ghosts and wind"];
     [self.locationManager stopRangingBeaconsInRegion:self.beaconRegion];
 }
+
+-(void)locationManager:(CLLocationManager *)manager didRangeBeacons:(NSArray *)beacons inRegion:(CLBeaconRegion *)region {
+    CLBeacon *beacon = [[CLBeacon alloc] init];
+    beacon = [beacons lastObject];
+    
+    self.proximityUUIDLabel.text = beacon.proximityUUID.UUIDString;
+    if (beacon.proximity == CLProximityUnknown) {
+        // TechDebt: maybe something?
+    } else if (beacon.proximity == CLProximityImmediate && self.isPlaying) {
+//        self.beaconFoundLabel.text = [NSString stringWithFormat: @"accuracy: %f", beacon.accuracy];
+        self.beaconFoundLabel.text = @"Gem very close!";
+        [self.stealButton setHidden:NO];
+    } else if (beacon.proximity == CLProximityNear && self.isPlaying) {
+        [self.beaconFoundLabel setText:@"Gem nearby!"];
+        [self.stealButton setHidden:NO];
+    } else if (beacon.proximity == CLProximityFar) {
+        self.isPlaying = YES;
+        self.beaconFoundLabel.text = @"Find the gem…";
+        [self.stealButton setHidden:YES];
+    }
+}
+
+
+// Game mechanics
 
 - (IBAction)stealButtonPressed:(id)sender {
     [self winGame];
 }
-
 
 - (void)winGame {
     NSLog(@"winGame");
     [self.beaconFoundLabel setText:@"YOU WIN!"];
     [self.stealButton setHidden:YES];
     [self.playAgainButton setHidden:NO];
+    self.isPlaying = NO;
 }
 
 - (IBAction)playAgainButtonPressed:(id)sender {
-    [self.beaconFoundLabel setText:@"Scanning"];
+    if (!self.isPlaying) {
+        [self.beaconFoundLabel setText:@"Move away from gem"];
+    }
     [self.playAgainButton setHidden:YES];
     [self.stealButton setHidden:YES];
 }
