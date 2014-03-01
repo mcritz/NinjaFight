@@ -1,0 +1,490 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0FD6E78218C24ABE00C960EC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FD6E78118C24ABE00C960EC /* Foundation.framework */; };
+		0FD6E78418C24ABE00C960EC /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FD6E78318C24ABE00C960EC /* CoreGraphics.framework */; };
+		0FD6E78618C24ABE00C960EC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FD6E78518C24ABE00C960EC /* UIKit.framework */; };
+		0FD6E78C18C24ABE00C960EC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0FD6E78A18C24ABE00C960EC /* InfoPlist.strings */; };
+		0FD6E78E18C24ABE00C960EC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FD6E78D18C24ABE00C960EC /* main.m */; };
+		0FD6E79218C24ABE00C960EC /* NIN_AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FD6E79118C24ABE00C960EC /* NIN_AppDelegate.m */; };
+		0FD6E79518C24ABE00C960EC /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0FD6E79318C24ABE00C960EC /* Main_iPhone.storyboard */; };
+		0FD6E79818C24ABE00C960EC /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0FD6E79618C24ABE00C960EC /* Main_iPad.storyboard */; };
+		0FD6E79B18C24ABE00C960EC /* NIN_ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FD6E79A18C24ABE00C960EC /* NIN_ViewController.m */; };
+		0FD6E79D18C24ABE00C960EC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0FD6E79C18C24ABE00C960EC /* Images.xcassets */; };
+		0FD6E7A418C24ABE00C960EC /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FD6E7A318C24ABE00C960EC /* XCTest.framework */; };
+		0FD6E7A518C24ABE00C960EC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FD6E78118C24ABE00C960EC /* Foundation.framework */; };
+		0FD6E7A618C24ABE00C960EC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FD6E78518C24ABE00C960EC /* UIKit.framework */; };
+		0FD6E7AE18C24ABE00C960EC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0FD6E7AC18C24ABE00C960EC /* InfoPlist.strings */; };
+		0FD6E7B018C24ABE00C960EC /* NinjaFightTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FD6E7AF18C24ABE00C960EC /* NinjaFightTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		0FD6E7A718C24ABE00C960EC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0FD6E77618C24ABD00C960EC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0FD6E77D18C24ABE00C960EC;
+			remoteInfo = NinjaFight;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0FD6E77E18C24ABE00C960EC /* NinjaFight.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NinjaFight.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0FD6E78118C24ABE00C960EC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		0FD6E78318C24ABE00C960EC /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		0FD6E78518C24ABE00C960EC /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		0FD6E78918C24ABE00C960EC /* NinjaFight-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "NinjaFight-Info.plist"; sourceTree = "<group>"; };
+		0FD6E78B18C24ABE00C960EC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		0FD6E78D18C24ABE00C960EC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		0FD6E78F18C24ABE00C960EC /* NinjaFight-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NinjaFight-Prefix.pch"; sourceTree = "<group>"; };
+		0FD6E79018C24ABE00C960EC /* NIN_AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NIN_AppDelegate.h; sourceTree = "<group>"; };
+		0FD6E79118C24ABE00C960EC /* NIN_AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NIN_AppDelegate.m; sourceTree = "<group>"; };
+		0FD6E79418C24ABE00C960EC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
+		0FD6E79718C24ABE00C960EC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
+		0FD6E79918C24ABE00C960EC /* NIN_ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NIN_ViewController.h; sourceTree = "<group>"; };
+		0FD6E79A18C24ABE00C960EC /* NIN_ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NIN_ViewController.m; sourceTree = "<group>"; };
+		0FD6E79C18C24ABE00C960EC /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		0FD6E7A218C24ABE00C960EC /* NinjaFightTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NinjaFightTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0FD6E7A318C24ABE00C960EC /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		0FD6E7AB18C24ABE00C960EC /* NinjaFightTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "NinjaFightTests-Info.plist"; sourceTree = "<group>"; };
+		0FD6E7AD18C24ABE00C960EC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		0FD6E7AF18C24ABE00C960EC /* NinjaFightTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NinjaFightTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0FD6E77B18C24ABE00C960EC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0FD6E78418C24ABE00C960EC /* CoreGraphics.framework in Frameworks */,
+				0FD6E78618C24ABE00C960EC /* UIKit.framework in Frameworks */,
+				0FD6E78218C24ABE00C960EC /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0FD6E79F18C24ABE00C960EC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0FD6E7A418C24ABE00C960EC /* XCTest.framework in Frameworks */,
+				0FD6E7A618C24ABE00C960EC /* UIKit.framework in Frameworks */,
+				0FD6E7A518C24ABE00C960EC /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0FD6E77518C24ABD00C960EC = {
+			isa = PBXGroup;
+			children = (
+				0FD6E78718C24ABE00C960EC /* NinjaFight */,
+				0FD6E7A918C24ABE00C960EC /* NinjaFightTests */,
+				0FD6E78018C24ABE00C960EC /* Frameworks */,
+				0FD6E77F18C24ABE00C960EC /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		0FD6E77F18C24ABE00C960EC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0FD6E77E18C24ABE00C960EC /* NinjaFight.app */,
+				0FD6E7A218C24ABE00C960EC /* NinjaFightTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0FD6E78018C24ABE00C960EC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0FD6E78118C24ABE00C960EC /* Foundation.framework */,
+				0FD6E78318C24ABE00C960EC /* CoreGraphics.framework */,
+				0FD6E78518C24ABE00C960EC /* UIKit.framework */,
+				0FD6E7A318C24ABE00C960EC /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		0FD6E78718C24ABE00C960EC /* NinjaFight */ = {
+			isa = PBXGroup;
+			children = (
+				0FD6E79018C24ABE00C960EC /* NIN_AppDelegate.h */,
+				0FD6E79118C24ABE00C960EC /* NIN_AppDelegate.m */,
+				0FD6E79318C24ABE00C960EC /* Main_iPhone.storyboard */,
+				0FD6E79618C24ABE00C960EC /* Main_iPad.storyboard */,
+				0FD6E79918C24ABE00C960EC /* NIN_ViewController.h */,
+				0FD6E79A18C24ABE00C960EC /* NIN_ViewController.m */,
+				0FD6E79C18C24ABE00C960EC /* Images.xcassets */,
+				0FD6E78818C24ABE00C960EC /* Supporting Files */,
+			);
+			path = NinjaFight;
+			sourceTree = "<group>";
+		};
+		0FD6E78818C24ABE00C960EC /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				0FD6E78918C24ABE00C960EC /* NinjaFight-Info.plist */,
+				0FD6E78A18C24ABE00C960EC /* InfoPlist.strings */,
+				0FD6E78D18C24ABE00C960EC /* main.m */,
+				0FD6E78F18C24ABE00C960EC /* NinjaFight-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0FD6E7A918C24ABE00C960EC /* NinjaFightTests */ = {
+			isa = PBXGroup;
+			children = (
+				0FD6E7AF18C24ABE00C960EC /* NinjaFightTests.m */,
+				0FD6E7AA18C24ABE00C960EC /* Supporting Files */,
+			);
+			path = NinjaFightTests;
+			sourceTree = "<group>";
+		};
+		0FD6E7AA18C24ABE00C960EC /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				0FD6E7AB18C24ABE00C960EC /* NinjaFightTests-Info.plist */,
+				0FD6E7AC18C24ABE00C960EC /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0FD6E77D18C24ABE00C960EC /* NinjaFight */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0FD6E7B318C24ABE00C960EC /* Build configuration list for PBXNativeTarget "NinjaFight" */;
+			buildPhases = (
+				0FD6E77A18C24ABE00C960EC /* Sources */,
+				0FD6E77B18C24ABE00C960EC /* Frameworks */,
+				0FD6E77C18C24ABE00C960EC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NinjaFight;
+			productName = NinjaFight;
+			productReference = 0FD6E77E18C24ABE00C960EC /* NinjaFight.app */;
+			productType = "com.apple.product-type.application";
+		};
+		0FD6E7A118C24ABE00C960EC /* NinjaFightTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0FD6E7B618C24ABE00C960EC /* Build configuration list for PBXNativeTarget "NinjaFightTests" */;
+			buildPhases = (
+				0FD6E79E18C24ABE00C960EC /* Sources */,
+				0FD6E79F18C24ABE00C960EC /* Frameworks */,
+				0FD6E7A018C24ABE00C960EC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0FD6E7A818C24ABE00C960EC /* PBXTargetDependency */,
+			);
+			name = NinjaFightTests;
+			productName = NinjaFightTests;
+			productReference = 0FD6E7A218C24ABE00C960EC /* NinjaFightTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0FD6E77618C24ABD00C960EC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = NIN_;
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = "Map of the Unexplored";
+				TargetAttributes = {
+					0FD6E7A118C24ABE00C960EC = {
+						TestTargetID = 0FD6E77D18C24ABE00C960EC;
+					};
+				};
+			};
+			buildConfigurationList = 0FD6E77918C24ABD00C960EC /* Build configuration list for PBXProject "NinjaFight" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 0FD6E77518C24ABD00C960EC;
+			productRefGroup = 0FD6E77F18C24ABE00C960EC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0FD6E77D18C24ABE00C960EC /* NinjaFight */,
+				0FD6E7A118C24ABE00C960EC /* NinjaFightTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		0FD6E77C18C24ABE00C960EC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0FD6E79818C24ABE00C960EC /* Main_iPad.storyboard in Resources */,
+				0FD6E79D18C24ABE00C960EC /* Images.xcassets in Resources */,
+				0FD6E79518C24ABE00C960EC /* Main_iPhone.storyboard in Resources */,
+				0FD6E78C18C24ABE00C960EC /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0FD6E7A018C24ABE00C960EC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0FD6E7AE18C24ABE00C960EC /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0FD6E77A18C24ABE00C960EC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0FD6E79218C24ABE00C960EC /* NIN_AppDelegate.m in Sources */,
+				0FD6E78E18C24ABE00C960EC /* main.m in Sources */,
+				0FD6E79B18C24ABE00C960EC /* NIN_ViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0FD6E79E18C24ABE00C960EC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0FD6E7B018C24ABE00C960EC /* NinjaFightTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		0FD6E7A818C24ABE00C960EC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0FD6E77D18C24ABE00C960EC /* NinjaFight */;
+			targetProxy = 0FD6E7A718C24ABE00C960EC /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		0FD6E78A18C24ABE00C960EC /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0FD6E78B18C24ABE00C960EC /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		0FD6E79318C24ABE00C960EC /* Main_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0FD6E79418C24ABE00C960EC /* Base */,
+			);
+			name = Main_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+		0FD6E79618C24ABE00C960EC /* Main_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0FD6E79718C24ABE00C960EC /* Base */,
+			);
+			name = Main_iPad.storyboard;
+			sourceTree = "<group>";
+		};
+		0FD6E7AC18C24ABE00C960EC /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0FD6E7AD18C24ABE00C960EC /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		0FD6E7B118C24ABE00C960EC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		0FD6E7B218C24ABE00C960EC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		0FD6E7B418C24ABE00C960EC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "NinjaFight/NinjaFight-Prefix.pch";
+				INFOPLIST_FILE = "NinjaFight/NinjaFight-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		0FD6E7B518C24ABE00C960EC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "NinjaFight/NinjaFight-Prefix.pch";
+				INFOPLIST_FILE = "NinjaFight/NinjaFight-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		0FD6E7B718C24ABE00C960EC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/NinjaFight.app/NinjaFight";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "NinjaFight/NinjaFight-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "NinjaFightTests/NinjaFightTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		0FD6E7B818C24ABE00C960EC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/NinjaFight.app/NinjaFight";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "NinjaFight/NinjaFight-Prefix.pch";
+				INFOPLIST_FILE = "NinjaFightTests/NinjaFightTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0FD6E77918C24ABD00C960EC /* Build configuration list for PBXProject "NinjaFight" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0FD6E7B118C24ABE00C960EC /* Debug */,
+				0FD6E7B218C24ABE00C960EC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0FD6E7B318C24ABE00C960EC /* Build configuration list for PBXNativeTarget "NinjaFight" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0FD6E7B418C24ABE00C960EC /* Debug */,
+				0FD6E7B518C24ABE00C960EC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		0FD6E7B618C24ABE00C960EC /* Build configuration list for PBXNativeTarget "NinjaFightTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0FD6E7B718C24ABE00C960EC /* Debug */,
+				0FD6E7B818C24ABE00C960EC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0FD6E77618C24ABD00C960EC /* Project object */;
+}
