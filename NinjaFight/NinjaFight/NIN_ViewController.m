@@ -43,6 +43,8 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor colorWithRed: 0.725 green: 0.914 blue: 0.984 alpha: 1];
 
+    
+    [self.debugLabel setHidden:YES];
     [self.beaconFoundLabel setText:@"Starting up…"];
     [self.stealButton setHidden:YES];
     [self.playAgainButton setHidden:YES];
