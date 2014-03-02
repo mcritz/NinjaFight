@@ -92,6 +92,10 @@ static NIN_BTManager *sharedInstance = nil;
         [self sendDictionaryToPeers:handshake];
     } else if (state == MCSessionStateNotConnected) {
         NSLog(@"No connection");
+        NSDictionary *dict = @{ @"command" : @(BluetoothCommandDisconnect),
+                               @"status" : @"disconnected" };
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"bluetoothDataReceived" object:dict];
+
     }
 }
 

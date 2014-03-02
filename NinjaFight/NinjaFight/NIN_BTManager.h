@@ -16,7 +16,8 @@ typedef enum {
     BluetoothCommandAttack,
     BluetoothCommandDefend,
     BluetoothCommandSteal,
-    BluetoothCommandWin
+    BluetoothCommandWin,
+    BluetoothCommandDisconnect
 } BluetoothCommand;
 
 @interface NIN_BTManager : NSObject <MCNearbyServiceBrowserDelegate, MCNearbyServiceAdvertiserDelegate, MCSessionDelegate>

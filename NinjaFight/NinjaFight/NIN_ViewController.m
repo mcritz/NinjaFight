@@ -70,15 +70,15 @@
 }
 
 - (void)clearActions {
-    if (!self.isInjured) {
+//    if (!self.isInjured) {
         self.gameStatusLabel.text = @"";
         [self.actionImage setImage:nil];
         [self.actionImage setHidden:YES];
         self.canAttack = YES;
         self.canSteal = YES;
         self.isDefending = NO;
-        [self.actionImage.layer removeAllAnimations];
-    }
+//        [self.actionImage.layer removeAllAnimations];
+//    }
 }
 
 - (void)defend {
@@ -97,9 +97,12 @@
     NSLog(@"I have been attacked");
     AudioServicesPlaySystemSound (kSystemSoundID_Vibrate);
     
-    if (self.isDefending
-        || self.isInjured) {
+    if (self.isInjured
+        || !self.isPlaying) {
         return;
+    } else if (self.isDefending) {
+        AudioServicesPlaySystemSound (bladeSoundFileObject);
+        [self.actionImage setImage:[UIImage imageNamed:@"defending"]];
     } else {
         self.isInjured = YES;
         AudioServicesPlaySystemSound (hitSoundFileObject);
@@ -165,6 +168,8 @@
                                                 withExtension: @"m4a"];
     self.hitSoundFileURLRef = [[NSBundle mainBundle] URLForResource: @"ouchsound_trimmed"
                                                          withExtension: @"m4a"];
+    self.bladeSoundFileURLRef = [[NSBundle mainBundle] URLForResource: @"ScreenFlow"
+                                                      withExtension: @"m4a"];
     self.winSoundFileURLRef = [[NSBundle mainBundle] URLForResource: @"oh_maaaaai"
                                                       withExtension: @"m4a"];
     self.loseSoundFileURLRef = [[NSBundle mainBundle] URLForResource: @"great_shame"
@@ -177,6 +182,10 @@
                               (__bridge CFURLRef)(self.hitSoundFileURLRef),
                               &hitSoundFileObject
                               );
+    AudioServicesCreateSystemSoundID (
+                                      (__bridge CFURLRef)(self.bladeSoundFileURLRef),
+                                      &bladeSoundFileObject
+                                      );
     AudioServicesCreateSystemSoundID (
                                       (__bridge CFURLRef)(self.winSoundFileURLRef),
                                       &winSoundFileObject
@@ -210,6 +219,7 @@
             case BluetoothCommandHandshake : {
                 NSLog(@"BluetoothCommandHandshake");
                 self.beaconFoundLabel.text = @"Another Ninja Approaches!";
+                self.debugLabel.text = [NSString stringWithFormat:@"Fighting: %@", [dict valueForKey:@"peerName"]];
                 break;
             }
             case BluetoothCommandAttack :
@@ -233,6 +243,10 @@
                 [self loseGame];
                 break;
             }
+            case BluetoothCommandDisconnect : {
+                self.beaconFoundLabel.text = @"Your enemies have fleed!";
+                self.debugLabel.text = @"Oppent disconnected";
+            }
         }
     }];
 }
@@ -254,7 +268,7 @@
 }
 
 - (void)locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region {
-    self.debugLabel.text = @"didEnterRegion";
+//    self.debugLabel.text = @"didEnterRegion";
 
     [self.gameStatusLabel setText:@""];
     [self.beaconFoundLabel setText:@"Find the gem!"];
@@ -263,7 +277,7 @@
 }
 
 -(void)locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region {
-    self.debugLabel.text = @"didExitRegion";
+//    self.debugLabel.text = @"didExitRegion";
     
     self.isPlaying = NO;
     [self.beaconFoundLabel setText:@"No gems found"];
@@ -285,22 +299,22 @@
 //        }
 //    }
     if (self.beacon.proximity == CLProximityUnknown) {
-        self.debugLabel.text = @"CLProximityUnknown";
+//        self.debugLabel.text = @"CLProximityUnknown";
     } else if (self.beacon.proximity == CLProximityImmediate) {
-        self.debugLabel.text = @"CLProximityImmediate";
+//        self.debugLabel.text = @"CLProximityImmediate";
         //        self.beaconFoundLabel.text = [NSString stringWithFormat: @"accuracy: %f", beacon.accuracy];
         if (self.isPlaying && !self.isStealing) {
             self.beaconFoundLabel.text = @"Steal the gem!";
             [self.gemImage setImage:[UIImage imageNamed:@"stealinggemrays1"]];
         }
     } else if (self.beacon.proximity == CLProximityNear) {
-        self.debugLabel.text = @"CLProximityNear";
+//        self.debugLabel.text = @"CLProximityNear";
         if (self.isPlaying && !self.isStealing) {
             [self.beaconFoundLabel setText:@"Gem nearby!"];
         }
         [self.gemImage setImage:[UIImage imageNamed:@"2color"]];
     } else if (self.beacon.proximity == CLProximityFar) {
-        self.debugLabel.text = @"CLProximityFar";
+//        self.debugLabel.text = @"CLProximityFar";
         self.isPlaying = YES;
         self.isStealing = NO; // TechDebt: user can hold a steal gesture, but this will fail
         self.beaconFoundLabel.text = @"Find the gem…";
@@ -428,7 +442,7 @@
 - (void)addSlowFadeToLayer:(CALayer *)layer {
     [CATransaction begin];
     CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"opacity"];
-    animation.duration = 1.5f;
+    animation.duration = 2.5f;
     animation.fromValue = [NSNumber numberWithFloat:1.0f];
     animation.toValue = [NSNumber numberWithFloat:0.0f];
     animation.removedOnCompletion = YES;
@@ -451,20 +465,22 @@
         return;
     }
     if ([sender state] == UIGestureRecognizerStateBegan && [self playerCanSteal]) {
-        [self.debugLabel setText:@"stealLongPress began"];
+//        [self.debugLabel setText:@"stealLongPress began"];
         NSLog(@"stealLongPress began");
 
         [self winGame];
         
     } else if ([sender state] == UIGestureRecognizerStateCancelled) {
-        self.debugLabel.text = @"stealLongPress ended";
+//        self.debugLabel.text = @"stealLongPress ended";
         NSLog(@"stealLongPress ended");
         self.isStealing = NO;
     }
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    if (![self playerCanSteal]) {
+    if (![self playerCanSteal]
+        || self.isInjured
+        || self.isDefending) {
         return;
     } else {
         NSDictionary *dict = @{@"command" : @(BluetoothCommandSteal)};

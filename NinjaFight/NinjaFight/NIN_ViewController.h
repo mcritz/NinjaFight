@@ -15,6 +15,7 @@
 @interface NIN_ViewController : UIViewController <CLLocationManagerDelegate, UIGestureRecognizerDelegate> {
 	SystemSoundID	attackSoundFileObject;
     SystemSoundID	hitSoundFileObject;
+    SystemSoundID	bladeSoundFileObject;
     SystemSoundID	winSoundFileObject;
     SystemSoundID	loseSoundFileObject;
 }
@@ -22,6 +23,7 @@
 // Audio
 @property (readwrite)NSURL *attackSoundFileURLRef;
 @property (readwrite)NSURL *hitSoundFileURLRef;
+@property (readwrite)NSURL *bladeSoundFileURLRef;
 @property (readwrite)NSURL *winSoundFileURLRef;
 @property (readwrite)NSURL *loseSoundFileURLRef;
 /*
