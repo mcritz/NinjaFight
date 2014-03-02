@@ -7,6 +7,7 @@
 //
 
 #import "NIN_ViewController.h"
+#import "NIN_BTManager.h"
 
 @interface NIN_ViewController ()
 
@@ -43,6 +44,12 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor colorWithRed: 0.725 green: 0.914 blue: 0.984 alpha: 1];
 
+    [NIN_BTManager instance];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(bluetoothDataReceived:)
+                                                 name:@"bluetoothDataReceived"
+                                               object:nil];
+
     
 //    [self.debugLabel setHidden:YES];
     [self.beaconFoundLabel setText:@"Starting up…"];
@@ -53,10 +60,38 @@
     self.stealLongPressGestureRecognizer.delegate = self;
 }
 
+- (void)bluetoothDataReceived:(NSNotification*)note {
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        NSDictionary *dict = [note object];
+        NSInteger command = [dict[@"command"] intValue];
+        switch( command ) {
+            case BluetoothCommandAttack :
+            {
+                NSLog(@"BluetoothCommandAttack");
+                break;
+            }
+            case BluetoothCommandDefend : {
+                NSLog(@"BluetoothCommandDefend");
+                break;
+            }
+            case BluetoothCommandSteal : {
+                NSLog(@"BluetoothCommandSteal");
+                break;
+            }
+            case BluetoothCommandWin : {
+                NSLog(@"BluetoothCommandWin");
+                break;
+            }
+        }
+    }];
+}
+
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 
