@@ -82,7 +82,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
-                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="3" id="h42-qU-5Ry">
+                <pongPressGestureRecognizer allowableMovement="20" minimumPressDuration="3" id="h42-qU-5Ry">
                     <connections>
                         <action selector="stealLongPress:" destination="vXZ-lx-hvc" id="NyS-qq-ffx"/>
                         <outlet property="delegate" destination="vXZ-lx-hvc" id="I4b-fA-B9e"/>
