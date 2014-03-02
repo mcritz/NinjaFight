@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0FA9403718C2D49C008164CB /* NIN_BTManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA9403618C2D49C008164CB /* NIN_BTManager.m */; };
+		0FA9403918C2D584008164CB /* MultipeerConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FA9403818C2D584008164CB /* MultipeerConnectivity.framework */; };
 		0FD6E78218C24ABE00C960EC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FD6E78118C24ABE00C960EC /* Foundation.framework */; };
 		0FD6E78418C24ABE00C960EC /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FD6E78318C24ABE00C960EC /* CoreGraphics.framework */; };
 		0FD6E78618C24ABE00C960EC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FD6E78518C24ABE00C960EC /* UIKit.framework */; };
@@ -35,6 +37,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0FA9403518C2D49C008164CB /* NIN_BTManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NIN_BTManager.h; sourceTree = "<group>"; };
+		0FA9403618C2D49C008164CB /* NIN_BTManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NIN_BTManager.m; sourceTree = "<group>"; };
+		0FA9403818C2D584008164CB /* MultipeerConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MultipeerConnectivity.framework; path = System/Library/Frameworks/MultipeerConnectivity.framework; sourceTree = SDKROOT; };
 		0FD6E77E18C24ABE00C960EC /* NinjaFight.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NinjaFight.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0FD6E78118C24ABE00C960EC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0FD6E78318C24ABE00C960EC /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -62,6 +67,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0FA9403918C2D584008164CB /* MultipeerConnectivity.framework in Frameworks */,
 				0FD6E78418C24ABE00C960EC /* CoreGraphics.framework in Frameworks */,
 				0FD6E78618C24ABE00C960EC /* UIKit.framework in Frameworks */,
 				0FD6E78218C24ABE00C960EC /* Foundation.framework in Frameworks */,
@@ -103,6 +109,7 @@
 		0FD6E78018C24ABE00C960EC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0FA9403818C2D584008164CB /* MultipeerConnectivity.framework */,
 				0FD6E78118C24ABE00C960EC /* Foundation.framework */,
 				0FD6E78318C24ABE00C960EC /* CoreGraphics.framework */,
 				0FD6E78518C24ABE00C960EC /* UIKit.framework */,
@@ -114,10 +121,12 @@
 		0FD6E78718C24ABE00C960EC /* NinjaFight */ = {
 			isa = PBXGroup;
 			children = (
-				0FD6E79018C24ABE00C960EC /* NIN_AppDelegate.h */,
-				0FD6E79118C24ABE00C960EC /* NIN_AppDelegate.m */,
 				0FD6E79318C24ABE00C960EC /* Main_iPhone.storyboard */,
 				0FD6E79618C24ABE00C960EC /* Main_iPad.storyboard */,
+				0FD6E79018C24ABE00C960EC /* NIN_AppDelegate.h */,
+				0FD6E79118C24ABE00C960EC /* NIN_AppDelegate.m */,
+				0FA9403518C2D49C008164CB /* NIN_BTManager.h */,
+				0FA9403618C2D49C008164CB /* NIN_BTManager.m */,
 				0FD6E79918C24ABE00C960EC /* NIN_ViewController.h */,
 				0FD6E79A18C24ABE00C960EC /* NIN_ViewController.m */,
 				0FD6E79C18C24ABE00C960EC /* Images.xcassets */,
@@ -257,6 +266,7 @@
 				0FD6E79218C24ABE00C960EC /* NIN_AppDelegate.m in Sources */,
 				0FD6E78E18C24ABE00C960EC /* main.m in Sources */,
 				0FD6E79B18C24ABE00C960EC /* NIN_ViewController.m in Sources */,
+				0FA9403718C2D49C008164CB /* NIN_BTManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

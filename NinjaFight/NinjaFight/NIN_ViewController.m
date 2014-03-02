@@ -44,7 +44,7 @@
     self.view.backgroundColor = [UIColor colorWithRed: 0.725 green: 0.914 blue: 0.984 alpha: 1];
 
     
-    [self.debugLabel setHidden:YES];
+//    [self.debugLabel setHidden:YES];
     [self.beaconFoundLabel setText:@"Starting up…"];
     [self.stealButton setHidden:YES];
     [self.playAgainButton setHidden:YES];
@@ -84,14 +84,15 @@
 }
 
 -(void)locationManager:(CLLocationManager *)manager didRangeBeacons:(NSArray *)beacons inRegion:(CLBeaconRegion *)region {
-    if (!self.beacon) {
-        for (CLBeacon *bcn in beacons) {
-            if ([bcn.major isEqualToNumber:@(1)] && [bcn.minor isEqualToNumber:@(4)]) {
-                self.beacon = bcn;
-                break;
-            }
-        }
-    }
+//    if (!self.beacon) {
+        self.beacon = [beacons lastObject];
+//        for (CLBeacon *bcn in beacons) {
+//            if ([bcn.major isEqualToNumber:@(1)] && [bcn.minor isEqualToNumber:@(4)]) {
+//                self.beacon = bcn;
+//                break;
+//            }
+//        }
+//    }
     if (self.beacon.proximity == CLProximityUnknown) {
         self.debugLabel.text = @"CLProximityFar";
     } else if (self.beacon.proximity == CLProximityImmediate) {
