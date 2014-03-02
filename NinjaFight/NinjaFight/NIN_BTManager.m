@@ -13,7 +13,7 @@ static NIN_BTManager *sharedInstance = nil;
 
 @implementation NIN_BTManager
 
-+(NIN_BTManager *) instance
++ (NIN_BTManager *)instance
 {
     if( sharedInstance == nil )
         sharedInstance = [NIN_BTManager new];
@@ -21,7 +21,7 @@ static NIN_BTManager *sharedInstance = nil;
 }
 
 
-- (id) init {
+- (id)init {
     self = [super init];
     // get user device name
     MCPeerID *myId = [[MCPeerID alloc] initWithDisplayName:[[UIDevice currentDevice] name]];
@@ -59,6 +59,7 @@ static NIN_BTManager *sharedInstance = nil;
     NSError *error = nil;
     NSData *encodedData = [NSKeyedArchiver archivedDataWithRootObject:dict];
     [session sendData:encodedData toPeers:session.connectedPeers withMode:MCSessionSendDataReliable error:&error];
+    NSLog(@"sent: \n%@", dict);
     if (error) {
         NSLog(@"Failed to send data to peers. :'(");
     }
@@ -85,8 +86,8 @@ static NIN_BTManager *sharedInstance = nil;
 - (void)session:(MCSession *)session peer:(MCPeerID *)peerID didChangeState:(MCSessionState)state {
     if (state == MCSessionStateConnected) {
         NSDictionary *handshake = @{
-                                    @(BluetoothCommandHandshake) : @"command",
-                                    [[UIDevice currentDevice] name] : @"peerName"
+                                     @"command" : @(BluetoothCommandHandshake),
+                                     @"peerName" : [[UIDevice currentDevice] name]
                                     };
         [self sendDictionaryToPeers:handshake];
     } else if (state == MCSessionStateNotConnected) {
@@ -124,8 +125,8 @@ static NIN_BTManager *sharedInstance = nil;
                 // They win the coin toss
                 _playerIndex = 1 - otherPlayer;
                 NSDictionary *confirmation = @{
-                                              [NSNumber numberWithInt:BluetoothCommandNegotiateConfirm] : @"command",
-                                              @(_playerIndex) : @"playerName"
+                                               @"command" : [NSNumber numberWithInt:BluetoothCommandNegotiateConfirm],
+                                               @"playerName" : @(_playerIndex)
                                               };
                 [self sendDictionaryToPeers:confirmation];
                 // Maybe: some type of warning…

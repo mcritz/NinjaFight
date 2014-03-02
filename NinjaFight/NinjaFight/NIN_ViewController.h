@@ -13,8 +13,8 @@
 @interface NIN_ViewController : UIViewController <CLLocationManagerDelegate, UIGestureRecognizerDelegate>
 
 // UI
-@property (weak, nonatomic) IBOutlet UILabel *proximityUUIDLabel;
 @property (weak, nonatomic) IBOutlet UILabel *beaconFoundLabel;
+@property (weak, nonatomic) IBOutlet UILabel *gameStatusLabel;
 @property (weak, nonatomic) IBOutlet UIButton *stealButton;
 - (IBAction)stealButtonPressed:(id)sender;
 @property (weak, nonatomic) IBOutlet UIButton *playAgainButton;

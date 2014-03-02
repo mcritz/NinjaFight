@@ -43,7 +43,12 @@
 {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor colorWithRed: 0.725 green: 0.914 blue: 0.984 alpha: 1];
+    CGAffineTransform labelRotation = CGAffineTransformMakeRotation(-.1);
+    [self.beaconFoundLabel setTransform:labelRotation];
+    [self.gameStatusLabel setTransform:labelRotation];
+    [self.gameStatusLabel setText:@"Loading…"];
 
+    
     [NIN_BTManager instance];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(bluetoothDataReceived:)
@@ -60,26 +65,35 @@
     self.stealLongPressGestureRecognizer.delegate = self;
 }
 
-- (void)bluetoothDataReceived:(NSNotification*)note {
+- (void)bluetoothDataReceived:(NSNotification *)note {
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
         NSDictionary *dict = [note object];
         NSInteger command = [dict[@"command"] intValue];
         switch( command ) {
+            case BluetoothCommandHandshake : {
+                NSLog(@"BluetoothCommandHandshake");
+                self.gameStatusLabel.text = @"Another Ninja Approaches!";
+                break;
+            }
             case BluetoothCommandAttack :
             {
                 NSLog(@"BluetoothCommandAttack");
+                self.gameStatusLabel.text = @"You have been attacked!";
                 break;
             }
             case BluetoothCommandDefend : {
                 NSLog(@"BluetoothCommandDefend");
+                self.gameStatusLabel.text = @"Opponent is defending!";
                 break;
             }
             case BluetoothCommandSteal : {
                 NSLog(@"BluetoothCommandSteal");
+                self.gameStatusLabel.text = @"Opponent is stealing!";
                 break;
             }
             case BluetoothCommandWin : {
                 NSLog(@"BluetoothCommandWin");
+                [self loseGame];
                 break;
             }
         }
@@ -105,6 +119,7 @@
 - (void)locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region {
     self.debugLabel.text = @"didEnterRegion";
 
+    [self.gameStatusLabel setText:@""];
     [self.beaconFoundLabel setText:@"Find the gem!"];
     self.isPlaying = YES;
     [self.locationManager startRangingBeaconsInRegion:self.beaconRegion];
@@ -115,10 +130,14 @@
     
     self.isPlaying = NO;
     [self.beaconFoundLabel setText:@"No gems found"];
+    [self.gameStatusLabel setText:@""];
     [self.locationManager stopRangingBeaconsInRegion:self.beaconRegion];
 }
 
 -(void)locationManager:(CLLocationManager *)manager didRangeBeacons:(NSArray *)beacons inRegion:(CLBeaconRegion *)region {
+    if (!self.isPlaying) {
+        return;
+    }
 //    if (!self.beacon) {
         self.beacon = [beacons lastObject];
 //        for (CLBeacon *bcn in beacons) {
@@ -129,29 +148,26 @@
 //        }
 //    }
     if (self.beacon.proximity == CLProximityUnknown) {
-        self.debugLabel.text = @"CLProximityFar";
+        self.debugLabel.text = @"CLProximityUnknown";
     } else if (self.beacon.proximity == CLProximityImmediate) {
         self.debugLabel.text = @"CLProximityImmediate";
         //        self.beaconFoundLabel.text = [NSString stringWithFormat: @"accuracy: %f", beacon.accuracy];
         if (self.isPlaying && !self.isStealing) {
             self.beaconFoundLabel.text = @"Steal the gem!";
             [self.gemImage setImage:[UIImage imageNamed:@"stealinggemrays1"]];
-//            [self.stealButton setHidden:NO];
         }
     } else if (self.beacon.proximity == CLProximityNear) {
         self.debugLabel.text = @"CLProximityNear";
         if (self.isPlaying && !self.isStealing) {
             [self.beaconFoundLabel setText:@"Gem nearby!"];
-//            [self.stealButton setHidden:NO];
         }
-        [self.gemImage setImage:[UIImage imageNamed:@"stealgem"]];
+        [self.gemImage setImage:[UIImage imageNamed:@"2color"]];
     } else if (self.beacon.proximity == CLProximityFar) {
         self.debugLabel.text = @"CLProximityFar";
         self.isPlaying = YES;
         self.isStealing = NO; // TechDebt: user can hold a steal gesture, but this will fail
         self.beaconFoundLabel.text = @"Find the gem…";
         [self.gemImage setImage:[UIImage imageNamed:@"onecolor"]];
-//        [self.stealButton setHidden:YES];
     }
 }
 
@@ -164,9 +180,25 @@
 
 - (void)winGame {
     NSLog(@"winGame");
+    self.isPlaying = NO;
+    self.isStealing = NO;
+    
+    NSDictionary *dict = @{@"command" : @(BluetoothCommandWin)};
+    [[NIN_BTManager instance] sendDictionaryToPeers:dict];
+    
+    [self.gemImage setImage:[UIImage imageNamed:@"blackninjawin"]];
     [self.linesImage setHidden:NO];
-    [self.beaconFoundLabel setText:@"YOU WIN!"];
-    [self.stealButton setHidden:YES];
+    [self.gameStatusLabel setText:@"YOU WIN!"];
+    [self.beaconFoundLabel setText:@""];
+    [self.playAgainButton setHidden:NO];
+}
+
+- (void)loseGame {
+    NSLog(@"loseGame");
+    [self.linesImage setHidden:YES];
+    [self.gemImage setImage:[UIImage imageNamed:@"blueninjayoulose"]];
+    [self.gameStatusLabel setText:@"YOU LOSE!"];
+    [self.beaconFoundLabel setText:@""];
     [self.playAgainButton setHidden:NO];
     self.isPlaying = NO;
 }
@@ -174,9 +206,11 @@
 - (IBAction)playAgainButtonPressed:(id)sender {
     self.isPlaying = YES;
     [self.beaconFoundLabel setText:@"Find the gem!"];
+    [self.gameStatusLabel setText:@""];
+    [self.gemImage setImage:[UIImage imageNamed:@"empty"]];
     
     if (!self.isPlaying) {
-//        [self.gemImage setImage:[UIImage imageNamed:@"empty"]];
+//                [self.gemImage setImage:[UIImage imageNamed:@"empty"]];
 //        [self.beaconFoundLabel setText:@"Move away from gem"];
     }
     [self.linesImage setHidden:YES];
@@ -265,6 +299,25 @@
         NSLog(@"stealLongPress ended");
         self.isStealing = NO;
     }
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    if (![self playerCanSteal]) {
+        return;
+    } else {
+        NSDictionary *dict = @{@"command" : @(BluetoothCommandSteal)};
+        [[NIN_BTManager instance] sendDictionaryToPeers:dict];
+        self.isStealing = YES;
+        [self.gemImage setImage:[UIImage imageNamed:@"stealinggemrays1"]];
+    }
+}
+
+- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
+    self.isStealing = NO;
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    self.isStealing = NO;
 }
 
 @end
