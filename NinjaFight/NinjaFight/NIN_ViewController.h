@@ -9,10 +9,27 @@
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import <CoreMotion/CoreMotion.h>
+#include <AudioToolbox/AudioToolbox.h>
 
 
-@interface NIN_ViewController : UIViewController <CLLocationManagerDelegate, UIGestureRecognizerDelegate>
+@interface NIN_ViewController : UIViewController <CLLocationManagerDelegate, UIGestureRecognizerDelegate> {
+	SystemSoundID	attackSoundFileObject;
+    SystemSoundID	hitSoundFileObject;
+    SystemSoundID	winSoundFileObject;
+    SystemSoundID	loseSoundFileObject;
+}
 
+// Audio
+@property (readwrite)NSURL *attackSoundFileURLRef;
+@property (readwrite)NSURL *hitSoundFileURLRef;
+@property (readwrite)NSURL *winSoundFileURLRef;
+@property (readwrite)NSURL *loseSoundFileURLRef;
+/*
+@property (readonly)SystemSoundID attackSoundFileObject;
+@property (readonly)SystemSoundID hitSoundFileObject;
+@property (readonly)SystemSoundID winSoundFileObject;
+@property (readonly)SystemSoundID loseSoundFileObject;
+*/
 // UI
 @property (weak, nonatomic) IBOutlet UILabel *beaconFoundLabel;
 @property (weak, nonatomic) IBOutlet UILabel *gameStatusLabel;

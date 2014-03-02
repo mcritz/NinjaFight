@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		0F7C83B618C3CC9300B26BA9 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F7C83B518C3CC9300B26BA9 /* CoreMotion.framework */; };
+		0F7C83BE18C3E82E00B26BA9 /* great_shame.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 0F7C83B818C3E82E00B26BA9 /* great_shame.m4a */; };
+		0F7C83BF18C3E82E00B26BA9 /* oh_maaaaai.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 0F7C83B918C3E82E00B26BA9 /* oh_maaaaai.m4a */; };
+		0F7C83C018C3E82E00B26BA9 /* ouchsound_trimmed.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 0F7C83BA18C3E82E00B26BA9 /* ouchsound_trimmed.m4a */; };
+		0F7C83C118C3E82E00B26BA9 /* hitsound.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 0F7C83BB18C3E82E00B26BA9 /* hitsound.m4a */; };
+		0F7C83C218C3E82E00B26BA9 /* hiyaa!.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 0F7C83BC18C3E82E00B26BA9 /* hiyaa!.m4a */; };
+		0F7C83C318C3E82E00B26BA9 /* ouchsound.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 0F7C83BD18C3E82E00B26BA9 /* ouchsound.m4a */; };
 		0FA9403718C2D49C008164CB /* NIN_BTManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA9403618C2D49C008164CB /* NIN_BTManager.m */; };
 		0FA9403918C2D584008164CB /* MultipeerConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FA9403818C2D584008164CB /* MultipeerConnectivity.framework */; };
 		0FD6E78218C24ABE00C960EC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FD6E78118C24ABE00C960EC /* Foundation.framework */; };
@@ -39,6 +45,12 @@
 
 /* Begin PBXFileReference section */
 		0F7C83B518C3CC9300B26BA9 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		0F7C83B818C3E82E00B26BA9 /* great_shame.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = great_shame.m4a; sourceTree = "<group>"; };
+		0F7C83B918C3E82E00B26BA9 /* oh_maaaaai.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = oh_maaaaai.m4a; sourceTree = "<group>"; };
+		0F7C83BA18C3E82E00B26BA9 /* ouchsound_trimmed.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = ouchsound_trimmed.m4a; sourceTree = "<group>"; };
+		0F7C83BB18C3E82E00B26BA9 /* hitsound.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = hitsound.m4a; sourceTree = "<group>"; };
+		0F7C83BC18C3E82E00B26BA9 /* hiyaa!.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "hiyaa!.m4a"; sourceTree = "<group>"; };
+		0F7C83BD18C3E82E00B26BA9 /* ouchsound.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = ouchsound.m4a; sourceTree = "<group>"; };
 		0FA9403518C2D49C008164CB /* NIN_BTManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NIN_BTManager.h; sourceTree = "<group>"; };
 		0FA9403618C2D49C008164CB /* NIN_BTManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NIN_BTManager.m; sourceTree = "<group>"; };
 		0FA9403818C2D584008164CB /* MultipeerConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MultipeerConnectivity.framework; path = System/Library/Frameworks/MultipeerConnectivity.framework; sourceTree = SDKROOT; };
@@ -90,6 +102,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0F7C83B718C3E81F00B26BA9 /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				0F7C83B818C3E82E00B26BA9 /* great_shame.m4a */,
+				0F7C83B918C3E82E00B26BA9 /* oh_maaaaai.m4a */,
+				0F7C83BA18C3E82E00B26BA9 /* ouchsound_trimmed.m4a */,
+				0F7C83BB18C3E82E00B26BA9 /* hitsound.m4a */,
+				0F7C83BC18C3E82E00B26BA9 /* hiyaa!.m4a */,
+				0F7C83BD18C3E82E00B26BA9 /* ouchsound.m4a */,
+			);
+			name = Audio;
+			sourceTree = "<group>";
+		};
 		0FD6E77518C24ABD00C960EC = {
 			isa = PBXGroup;
 			children = (
@@ -134,6 +159,7 @@
 				0FD6E79918C24ABE00C960EC /* NIN_ViewController.h */,
 				0FD6E79A18C24ABE00C960EC /* NIN_ViewController.m */,
 				0FD6E79C18C24ABE00C960EC /* Images.xcassets */,
+				0F7C83B718C3E81F00B26BA9 /* Audio */,
 				0FD6E78818C24ABE00C960EC /* Supporting Files */,
 			);
 			path = NinjaFight;
@@ -245,10 +271,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F7C83C018C3E82E00B26BA9 /* ouchsound_trimmed.m4a in Resources */,
 				0FD6E79818C24ABE00C960EC /* Main_iPad.storyboard in Resources */,
+				0F7C83C118C3E82E00B26BA9 /* hitsound.m4a in Resources */,
 				0FD6E79D18C24ABE00C960EC /* Images.xcassets in Resources */,
 				0FD6E79518C24ABE00C960EC /* Main_iPhone.storyboard in Resources */,
+				0F7C83BE18C3E82E00B26BA9 /* great_shame.m4a in Resources */,
+				0F7C83C218C3E82E00B26BA9 /* hiyaa!.m4a in Resources */,
+				0F7C83C318C3E82E00B26BA9 /* ouchsound.m4a in Resources */,
 				0FD6E78C18C24ABE00C960EC /* InfoPlist.strings in Resources */,
+				0F7C83BF18C3E82E00B26BA9 /* oh_maaaaai.m4a in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

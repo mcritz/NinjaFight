@@ -61,6 +61,7 @@
         !self.isPlaying) {
         return;
     } else {
+        AudioServicesPlaySystemSound (attackSoundFileObject);
         self.gameStatusLabel.text = @"Attack!";
         self.canSteal = NO;
         NSDictionary *dict = @{@"command" : @(BluetoothCommandAttack)};
@@ -94,10 +95,14 @@
 
 - (void)attacked {
     NSLog(@"I have been attacked");
-    if (self.isDefending) {
+    AudioServicesPlaySystemSound (kSystemSoundID_Vibrate);
+    
+    if (self.isDefending
+        || self.isInjured) {
         return;
     } else {
         self.isInjured = YES;
+        AudioServicesPlaySystemSound (hitSoundFileObject);
         self.gameStatusLabel.text = @"You have been attacked!";
         [self.actionImage setImage:[UIImage imageNamed:@"OUCH"]];
         [self.actionImage setHidden:NO];
@@ -132,7 +137,7 @@
     [self.gameStatusLabel setTransform:labelRotation];
     [self.gameStatusLabel setText:@"Loading…"];
 
-    
+    // Networking
     [NIN_BTManager instance];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(bluetoothDataReceived:)
@@ -155,7 +160,32 @@
         }
     }];
 
-    
+    // Audio
+    self.attackSoundFileURLRef = [[NSBundle mainBundle] URLForResource: @"hiyaa!"
+                                                withExtension: @"m4a"];
+    self.hitSoundFileURLRef = [[NSBundle mainBundle] URLForResource: @"ouchsound_trimmed"
+                                                         withExtension: @"m4a"];
+    self.winSoundFileURLRef = [[NSBundle mainBundle] URLForResource: @"oh_maaaaai"
+                                                      withExtension: @"m4a"];
+    self.loseSoundFileURLRef = [[NSBundle mainBundle] URLForResource: @"great_shame"
+                                                      withExtension: @"m4a"];
+    AudioServicesCreateSystemSoundID (
+                                  (__bridge CFURLRef)(self.attackSoundFileURLRef),
+                                  &attackSoundFileObject
+                              );
+    AudioServicesCreateSystemSoundID (
+                              (__bridge CFURLRef)(self.hitSoundFileURLRef),
+                              &hitSoundFileObject
+                              );
+    AudioServicesCreateSystemSoundID (
+                                      (__bridge CFURLRef)(self.winSoundFileURLRef),
+                                      &winSoundFileObject
+                                      );
+    AudioServicesCreateSystemSoundID (
+                                      (__bridge CFURLRef)(self.loseSoundFileURLRef),
+                                      &loseSoundFileObject
+                                      );
+
     
     // UI
 //    [self.debugLabel setHidden:YES];
@@ -293,6 +323,7 @@
     NSDictionary *dict = @{@"command" : @(BluetoothCommandWin)};
     [[NIN_BTManager instance] sendDictionaryToPeers:dict];
     
+    AudioServicesPlaySystemSound (winSoundFileObject);
     [self.gemImage setImage:[UIImage imageNamed:@"blackninjawin"]];
     [self.linesImage setHidden:NO];
     [self.gameStatusLabel setText:@"YOU WIN!"];
@@ -303,6 +334,8 @@
 - (void)loseGame {
     NSLog(@"loseGame");
     [self.linesImage setHidden:YES];
+    
+    AudioServicesPlaySystemSound (loseSoundFileObject);
     [self.gemImage setImage:[UIImage imageNamed:@"blueninjayoulose"]];
     [self.gameStatusLabel setText:@"YOU LOSE!"];
     [self.beaconFoundLabel setText:@""];
