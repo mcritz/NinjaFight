@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
+#import <CoreMotion/CoreMotion.h>
 
 
 @interface NIN_ViewController : UIViewController <CLLocationManagerDelegate, UIGestureRecognizerDelegate>
@@ -23,6 +24,7 @@
 - (IBAction)stealLongPress:(UILongPressGestureRecognizer *)sender;
 @property (weak, nonatomic) IBOutlet UIImageView *gemImage;
 @property (weak, nonatomic) IBOutlet UIImageView *linesImage;
+@property (weak, nonatomic) IBOutlet UIImageView *actionImage;
 @property (weak, nonatomic) IBOutlet UILabel *debugLabel;
 
 // CL

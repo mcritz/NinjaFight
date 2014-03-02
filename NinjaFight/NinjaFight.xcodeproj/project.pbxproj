@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F7C83B618C3CC9300B26BA9 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F7C83B518C3CC9300B26BA9 /* CoreMotion.framework */; };
 		0FA9403718C2D49C008164CB /* NIN_BTManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA9403618C2D49C008164CB /* NIN_BTManager.m */; };
 		0FA9403918C2D584008164CB /* MultipeerConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FA9403818C2D584008164CB /* MultipeerConnectivity.framework */; };
 		0FD6E78218C24ABE00C960EC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FD6E78118C24ABE00C960EC /* Foundation.framework */; };
@@ -37,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0F7C83B518C3CC9300B26BA9 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		0FA9403518C2D49C008164CB /* NIN_BTManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NIN_BTManager.h; sourceTree = "<group>"; };
 		0FA9403618C2D49C008164CB /* NIN_BTManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NIN_BTManager.m; sourceTree = "<group>"; };
 		0FA9403818C2D584008164CB /* MultipeerConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MultipeerConnectivity.framework; path = System/Library/Frameworks/MultipeerConnectivity.framework; sourceTree = SDKROOT; };
@@ -67,6 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F7C83B618C3CC9300B26BA9 /* CoreMotion.framework in Frameworks */,
 				0FA9403918C2D584008164CB /* MultipeerConnectivity.framework in Frameworks */,
 				0FD6E78418C24ABE00C960EC /* CoreGraphics.framework in Frameworks */,
 				0FD6E78618C24ABE00C960EC /* UIKit.framework in Frameworks */,
@@ -109,6 +112,7 @@
 		0FD6E78018C24ABE00C960EC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0F7C83B518C3CC9300B26BA9 /* CoreMotion.framework */,
 				0FA9403818C2D584008164CB /* MultipeerConnectivity.framework */,
 				0FD6E78118C24ABE00C960EC /* Foundation.framework */,
 				0FD6E78318C24ABE00C960EC /* CoreGraphics.framework */,

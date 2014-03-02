@@ -12,8 +12,14 @@
 @interface NIN_ViewController ()
 
 @property bool isPlaying;
+@property bool canSteal;
 @property bool isStealing;
+@property bool canAttack;
+@property bool isDefending;
+@property bool isInjured;
+
 @property (nonatomic, strong)CLBeacon *beacon;
+@property (nonatomic, strong)CMMotionManager *motionManager;
 
 @end
 
@@ -21,6 +27,84 @@
 
 @synthesize locationManager = _locationManager;
 @synthesize stealLongPressGestureRecognizer;
+
+-(void)outputAccelertionData:(CMAcceleration)acceleration
+{
+    float xThreshold = .3;
+    float yThreshold = .8;
+    float zThreshold = .3;
+    if (fabs(acceleration.x) < xThreshold
+        && fabs(acceleration.y) > yThreshold
+        && fabs(acceleration.z) < zThreshold) {
+        [self defend];
+    } else {
+        [self clearActions];
+    }
+//    self.debugLabel.text = [NSString stringWithFormat:@"a: %f, %f, %f", acceleration.x, acceleration.y, acceleration.z];
+}
+
+-(void)outputRotationData:(CMRotationRate)rotation
+{
+    float xThreshold = .8;
+    float yThreshold = .8;
+    float zThreshold = .8;
+    if (fabs(rotation.x) > xThreshold
+        && fabs(rotation.y) > yThreshold
+        && fabs(rotation.z) > zThreshold) {
+        [self attack];
+    }
+}
+
+- (void)attack {
+    NSLog(@"Attacking!");
+    if (self.isInjured ||
+        !self.isPlaying) {
+        return;
+    } else {
+        self.gameStatusLabel.text = @"Attack!";
+        self.canSteal = NO;
+        NSDictionary *dict = @{@"command" : @(BluetoothCommandAttack)};
+        [[NIN_BTManager instance] sendDictionaryToPeers:dict];
+    }
+}
+
+- (void)clearActions {
+    if (!self.isInjured) {
+        self.gameStatusLabel.text = @"";
+        [self.actionImage setImage:nil];
+        [self.actionImage setHidden:YES];
+        self.canAttack = YES;
+        self.canSteal = YES;
+        self.isDefending = NO;
+        [self.actionImage.layer removeAllAnimations];
+    }
+}
+
+- (void)defend {
+    if (!self.isInjured
+        && self.isPlaying) {
+        self.gameStatusLabel.text = @"Defending!";
+        [self.actionImage setImage:[UIImage imageNamed:@"defending"]];
+        [self.actionImage setHidden:NO];
+        self.canAttack = NO;
+        self.isDefending = YES;
+        self.canSteal = NO;
+    }
+}
+
+- (void)attacked {
+    NSLog(@"I have been attacked");
+    if (self.isDefending) {
+        return;
+    } else {
+        self.isInjured = YES;
+        self.gameStatusLabel.text = @"You have been attacked!";
+        [self.actionImage setImage:[UIImage imageNamed:@"OUCH"]];
+        [self.actionImage setHidden:NO];
+        [self addSlowFadeToLayer:self.actionImage.layer];
+        self.canAttack = NO;
+    }
+}
 
 - (CLLocationManager *)locationManager {
     if (!_locationManager) {
@@ -54,15 +138,38 @@
                                              selector:@selector(bluetoothDataReceived:)
                                                  name:@"bluetoothDataReceived"
                                                object:nil];
+    // CoreMotion
+    self.motionManager = [[CMMotionManager alloc] init];
+    self.motionManager.accelerometerUpdateInterval = .2;
+    self.motionManager.gyroUpdateInterval = .2;
+    [self.motionManager startAccelerometerUpdatesToQueue:[NSOperationQueue currentQueue] withHandler:^(CMAccelerometerData *accelerometerData, NSError *error){
+        [self outputAccelertionData:accelerometerData.acceleration];
+        if (error) {
+            NSLog(@"CMAccError: \n%@", error);
+        }
+    }];
+    [self.motionManager startGyroUpdatesToQueue:[NSOperationQueue currentQueue] withHandler:^(CMGyroData *gyroData, NSError *error){
+        [self outputRotationData:gyroData.rotationRate];
+        if (error) {
+            NSLog(@"CMGyroError: \n%@", error);
+        }
+    }];
 
     
+    
+    // UI
 //    [self.debugLabel setHidden:YES];
+
     [self.beaconFoundLabel setText:@"Starting up…"];
     [self.stealButton setHidden:YES];
     [self.playAgainButton setHidden:YES];
     [self.linesImage setHidden:YES];
     [self initRegion];
     self.stealLongPressGestureRecognizer.delegate = self;
+    
+    self.canAttack = YES;
+    self.canSteal = YES;
+    self.isInjured = NO;
 }
 
 - (void)bluetoothDataReceived:(NSNotification *)note {
@@ -72,13 +179,13 @@
         switch( command ) {
             case BluetoothCommandHandshake : {
                 NSLog(@"BluetoothCommandHandshake");
-                self.gameStatusLabel.text = @"Another Ninja Approaches!";
+                self.beaconFoundLabel.text = @"Another Ninja Approaches!";
                 break;
             }
             case BluetoothCommandAttack :
             {
                 NSLog(@"BluetoothCommandAttack");
-                self.gameStatusLabel.text = @"You have been attacked!";
+                [self attacked];
                 break;
             }
             case BluetoothCommandDefend : {
@@ -205,6 +312,11 @@
 
 - (IBAction)playAgainButtonPressed:(id)sender {
     self.isPlaying = YES;
+    self.canAttack = YES;
+    self.canSteal = YES;
+    self.isInjured = NO;
+    [self clearActions];
+    
     [self.beaconFoundLabel setText:@"Find the gem!"];
     [self.gameStatusLabel setText:@""];
     [self.gemImage setImage:[UIImage imageNamed:@"empty"]];
@@ -222,10 +334,10 @@
 
 - (bool)playerCanSteal {
     return YES;
-    if (!self.isPlaying) {
-        return NO;
-    }
-    if (!self.beacon) {
+    if (!self.isPlaying
+        || !self.beacon
+        || self.isInjured
+        || self.isDefending) {
         return NO;
     }
     switch (self.beacon.proximity) {
@@ -279,6 +391,23 @@
     [layer addAnimation:translation forKey:keyPath];
 }
 
+
+- (void)addSlowFadeToLayer:(CALayer *)layer {
+    [CATransaction begin];
+    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"opacity"];
+    animation.duration = 1.5f;
+    animation.fromValue = [NSNumber numberWithFloat:1.0f];
+    animation.toValue = [NSNumber numberWithFloat:0.0f];
+    animation.removedOnCompletion = YES;
+    animation.fillMode = kCAFillModeBoth;
+    animation.additive = NO;
+    [CATransaction setCompletionBlock:^(void){
+        self.isInjured = NO;
+        [self clearActions];
+    }];
+    [layer addAnimation:animation forKey:@"opacityOUT"];
+    [CATransaction commit];
+}
 
 - (IBAction)stealLongPress:(UILongPressGestureRecognizer *)sender {
     NSLog(@"stealLongPress");
