@@ -16,15 +16,29 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WM3-qx-Ist">
-                                <rect key="frame" x="20" y="142" width="280" height="21"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="yellowlines" translatesAutoresizingMaskIntoConstraints="NO" id="YGo-hF-BwI">
+                                <rect key="frame" x="-8" y="116" width="337" height="335"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="h42-qU-5Ry" appends="YES" id="7EN-1K-Oc0"/>
+                                </connections>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="empty" translatesAutoresizingMaskIntoConstraints="NO" id="lcz-ib-2Nd">
+                                <rect key="frame" x="9" y="133" width="303" height="302"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="h42-qU-5Ry" appends="YES" id="Om2-x1-04D"/>
+                                </connections>
+                            </imageView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WM3-qx-Ist" userLabel="locationLabel">
+                                <rect key="frame" x="20" y="104" width="280" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gdQ-0u-bxm">
-                                <rect key="frame" x="20" y="327" width="280" height="30"/>
+                                <rect key="frame" x="20" y="458" width="280" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Steal Gem">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -34,7 +48,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="skZ-6Y-O91">
-                                <rect key="frame" x="20" y="414" width="280" height="30"/>
+                                <rect key="frame" x="20" y="518" width="280" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Play Again">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -43,30 +57,45 @@
                                     <action selector="playAgainButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="f9L-Hb-Fum"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="debug" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="igJ-9e-NdQ" userLabel="locationLabel">
+                                <rect key="frame" x="20" y="50" width="280" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <connections>
-                            <outletCollection property="gestureRecognizers" destination="FvV-ti-Jr4" appends="YES" id="hCG-ob-hBs"/>
+                            <outletCollection property="gestureRecognizers" destination="h42-qU-5Ry" appends="YES" id="b4o-7F-rAY"/>
                         </connections>
                     </view>
                     <connections>
                         <outlet property="beaconFoundLabel" destination="WM3-qx-Ist" id="YPt-CX-b6r"/>
+                        <outlet property="debugLabel" destination="igJ-9e-NdQ" id="ahn-IR-ccK"/>
+                        <outlet property="gemImage" destination="lcz-ib-2Nd" id="WKJ-wk-9Qf"/>
+                        <outlet property="linesImage" destination="YGo-hF-BwI" id="DLN-fT-CF5"/>
                         <outlet property="playAgainButton" destination="skZ-6Y-O91" id="GiF-hf-YiH"/>
                         <outlet property="stealButton" destination="gdQ-0u-bxm" id="497-1n-A1f"/>
-                        <outlet property="stealLongPressGestureRecognizer" destination="FvV-ti-Jr4" id="QkB-7C-sSy"/>
+                        <outlet property="stealLongPressGestureRecognizer" destination="h42-qU-5Ry" id="Wan-QH-0ai"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
-                <pongPressGestureRecognizer allowableMovement="20" minimumPressDuration="0.5" id="FvV-ti-Jr4">
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="3" id="h42-qU-5Ry">
                     <connections>
-                        <action selector="stealLongPress:" destination="vXZ-lx-hvc" id="Jyv-b4-3cW"/>
-                        <outlet property="delegate" destination="vXZ-lx-hvc" id="Dam-bA-bfl"/>
+                        <action selector="stealLongPress:" destination="vXZ-lx-hvc" id="NyS-qq-ffx"/>
+                        <outlet property="delegate" destination="vXZ-lx-hvc" id="I4b-fA-B9e"/>
                     </connections>
                 </pongPressGestureRecognizer>
             </objects>
+            <point key="canvasLocation" x="107" y="79"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="empty" width="303" height="302"/>
+        <image name="yellowlines" width="303" height="302"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

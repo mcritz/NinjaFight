@@ -475,6 +475,7 @@
 				0FD6E7B518C24ABE00C960EC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0FD6E7B618C24ABE00C960EC /* Build configuration list for PBXNativeTarget "NinjaFightTests" */ = {
 			isa = XCConfigurationList;
@@ -483,6 +484,7 @@
 				0FD6E7B818C24ABE00C960EC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

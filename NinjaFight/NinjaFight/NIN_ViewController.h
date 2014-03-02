@@ -20,8 +20,10 @@
 @property (weak, nonatomic) IBOutlet UIButton *playAgainButton;
 - (IBAction)playAgainButtonPressed:(id)sender;
 @property (strong, nonatomic) IBOutlet UILongPressGestureRecognizer *stealLongPressGestureRecognizer;
-- (IBAction)stealLongPress:(id)sender;
-
+- (IBAction)stealLongPress:(UILongPressGestureRecognizer *)sender;
+@property (weak, nonatomic) IBOutlet UIImageView *gemImage;
+@property (weak, nonatomic) IBOutlet UIImageView *linesImage;
+@property (weak, nonatomic) IBOutlet UILabel *debugLabel;
 
 // CL
 @property (strong, nonatomic) CLBeaconRegion *beaconRegion;
