@@ -135,11 +135,15 @@
 
 - (IBAction)playAgainButtonPressed:(id)sender {
     self.isPlaying = YES;
+    [self.beaconFoundLabel setText:@"Find the gem!"];
+    
     if (!self.isPlaying) {
 //        [self.gemImage setImage:[UIImage imageNamed:@"empty"]];
 //        [self.beaconFoundLabel setText:@"Move away from gem"];
     }
     [self.linesImage setHidden:YES];
+    [self.linesImage.layer removeAllAnimations];
+    
     [self.playAgainButton setHidden:YES];
     [self.stealButton setHidden:YES];
 }
@@ -172,8 +176,42 @@
 
 // UI Gestures
 
+- (void)addRotateAnimationForLayer:(CALayer *)layer{
+    
+    NSString *keyPath = @"transform.rotation";
+    
+    // Allocate a CAKeyFrameAnimation for the specified keyPath.
+    CAKeyframeAnimation *translation = [CAKeyframeAnimation animationWithKeyPath:keyPath];
+    
+    // Set animation duration and repeat
+    translation.duration = 3.5f;
+    translation.repeatCount = HUGE_VAL;
+    
+    // Allocate array to hold the values to interpolate
+    NSMutableArray *values = [[NSMutableArray alloc] init];
+    
+    // Add the start value
+    // The animation starts at a y offset of 0.0
+    [values addObject:[NSNumber numberWithFloat:0.0f]];
+    
+    // Add the end value
+    // The animation finishes when the ball would contact the bottom of the screen
+    // This point is calculated by finding the height of the applicationFrame
+    // and subtracting the height of the ball.
+    CGFloat height = [[UIScreen mainScreen] applicationFrame].size.height - layer.frame.size.height;
+    [values addObject:[NSNumber numberWithFloat:height]];
+    
+    // Set the values that should be interpolated during the animation
+    translation.values = values;
+    
+    [layer addAnimation:translation forKey:keyPath];
+}
+
+
 - (IBAction)stealLongPress:(UILongPressGestureRecognizer *)sender {
     NSLog(@"stealLongPress");
+    [self.linesImage setHidden:NO];
+    [self addRotateAnimationForLayer:self.linesImage.layer];
     
     if (![self playerCanSteal]) {
         return;
