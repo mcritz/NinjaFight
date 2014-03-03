@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 Map of the Unexplored. All rights reserved.
 //
 
+#define kDEBUG YES
+
 #import "NIN_ViewController.h"
 #import "NIN_BTManager.h"
 
@@ -36,9 +38,9 @@
     if (fabs(acceleration.x) < xThreshold
         && fabs(acceleration.y) > yThreshold
         && fabs(acceleration.z) < zThreshold) {
-        [self defend];
+        [self defend:YES];
     } else {
-        [self clearActions];
+        [self defend:NO];
     }
 //    self.debugLabel.text = [NSString stringWithFormat:@"a: %f, %f, %f", acceleration.x, acceleration.y, acceleration.z];
 }
@@ -56,13 +58,14 @@
 }
 
 - (void)attack {
-    NSLog(@"Attacking!");
+    [self debugLog:@"attack"];
     if (self.isInjured ||
         !self.isPlaying) {
         return;
     } else {
         AudioServicesPlaySystemSound (attackSoundFileObject);
-        self.gameStatusLabel.text = @"Attack!";
+//        self.gameStatusLabel.text = @"Attack!";
+        [self queueStatus:@"Attack"];
         self.canSteal = NO;
         NSDictionary *dict = @{@"command" : @(BluetoothCommandAttack)};
         [[NIN_BTManager instance] sendDictionaryToPeers:dict];
@@ -70,26 +73,44 @@
 }
 
 - (void)clearActions {
-//    if (!self.isInjured) {
-        self.gameStatusLabel.text = @"";
+    if (!self.isInjured) {
+//        self.gameStatusLabel.text = @"";
+        [self queueStatus:@""];
         [self.actionImage setImage:nil];
         [self.actionImage setHidden:YES];
         self.canAttack = YES;
         self.canSteal = YES;
         self.isDefending = NO;
-//        [self.actionImage.layer removeAllAnimations];
-//    }
+    }
 }
 
-- (void)defend {
-    if (!self.isInjured
+- (void)queueStatus:(NSString *)status {
+    if (self.gameStatusLabel.layer.animationKeys) {
+        return;
+    }
+    if (![status isEqualToString:@""]
+        && !self.isDefending) {
+        [self addFadeAndScaleToLayer:self.gameStatusLabel.layer];
+    }
+    self.gameStatusLabel.text = status;
+}
+
+- (void)defend:(bool)on {
+    if (on
+        && !self.isInjured
         && self.isPlaying) {
-        self.gameStatusLabel.text = @"Defending!";
+        [self queueStatus:@"Defending!"];
         [self.actionImage setImage:[UIImage imageNamed:@"defending"]];
         [self.actionImage setHidden:NO];
         self.canAttack = NO;
         self.isDefending = YES;
         self.canSteal = NO;
+    } else if (!on) {
+        // TODO: clearActions
+        self.canAttack = YES;
+        self.isDefending = NO;
+        [self queueStatus:@""];
+        [self.actionImage setImage:nil];
     }
 }
 
@@ -102,7 +123,7 @@
         return;
     } else if (self.isDefending) {
         AudioServicesPlaySystemSound (bladeSoundFileObject);
-        [self.actionImage setImage:[UIImage imageNamed:@"defending"]];
+        [self.actionImage setImage:[UIImage imageNamed:@"block"]];
     } else {
         self.isInjured = YES;
         AudioServicesPlaySystemSound (hitSoundFileObject);
@@ -244,8 +265,8 @@
                 break;
             }
             case BluetoothCommandDisconnect : {
-                self.beaconFoundLabel.text = @"Your enemies have fleed!";
-                self.debugLabel.text = @"Oppent disconnected";
+//                self.beaconFoundLabel.text = @"Your enemies have fled!";
+                self.debugLabel.text = @"";
             }
         }
     }];
@@ -261,7 +282,7 @@
 
 
 - (void)initRegion {
-    self.debugLabel.text = @"initRegion";
+//    self.debugLabel.text = @"initRegion";
     self.isPlaying = YES;
     [self.beaconFoundLabel setText:@"No gems found…"];
     [self.locationManager startMonitoringForRegion:self.beaconRegion];
@@ -380,7 +401,6 @@
 }
 
 - (bool)playerCanSteal {
-    return YES;
     if (!self.isPlaying
         || !self.beacon
         || self.isInjured
@@ -401,7 +421,6 @@
             return NO;
             break;
     }
-    return NO; // just 'cause
 }
 
 
@@ -438,6 +457,24 @@
     [layer addAnimation:translation forKey:keyPath];
 }
 
+- (void)addFadeAndScaleToLayer:(CALayer *)layer {
+    [CATransaction begin];
+    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
+    animation.duration = 0.3f;
+    animation.fromValue = [NSNumber numberWithFloat:6.0f];
+    animation.toValue = [NSNumber numberWithFloat:1.0f];
+    animation.removedOnCompletion = YES;
+    animation.fillMode = kCAFillModeBoth;
+    animation.additive = NO;
+    [CATransaction setCompletionBlock:^(void){
+//        self.isInjured = NO;
+//        [self clearActions];
+        [layer removeAllAnimations];
+    }];
+    [layer addAnimation:animation forKey:@"fadeAndScale"];
+    [CATransaction commit];
+}
+
 
 - (void)addSlowFadeToLayer:(CALayer *)layer {
     [CATransaction begin];
@@ -451,6 +488,7 @@
     [CATransaction setCompletionBlock:^(void){
         self.isInjured = NO;
         [self clearActions];
+        [layer removeAllAnimations];
     }];
     [layer addAnimation:animation forKey:@"opacityOUT"];
     [CATransaction commit];
@@ -496,6 +534,12 @@
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     self.isStealing = NO;
+}
+
+- (void)debugLog:(NSString *)string {
+    if (kDEBUG) {
+        NSLog(@"%@", string);
+    }
 }
 
 @end
